@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><script>/* no page pinch/double-tap zoom: it knocks the 3D labels and panels out of place. The 3D view has its own zoom. */["gesturestart","gesturechange","gestureend"].forEach(function(t){document.addEventListener(t,function(e){e.preventDefault()},{passive:false})});document.addEventListener("touchmove",function(e){if(e.scale&&e.scale!==1)e.preventDefault()},{passive:false});</script><style>html,body{touch-action:pan-x pan-y}:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Grant Willian — Portfolio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,7 +70,14 @@ footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space
 footer .facts{color:var(--paper);display:flex;flex-wrap:wrap;gap:.3em 0} footer .facts b{color:var(--volt);font-weight:400}
 footer .facts span{white-space:nowrap} footer .facts span+span::before{content:"·";margin:0 .7em;color:var(--mute)}
 footer .hint{color:var(--mute)}
-footer .swipe{display:none;color:var(--mute);width:100%;text-align:center}
+footer .swipe{display:none;width:100%;justify-content:center;transition:opacity .4s}
+footer .swipe span{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 7px;border:2px solid var(--volt);background:rgba(0,0,0,.72);color:#fff;font-size:11px;letter-spacing:.06em}
+footer .swipe i{font-style:normal;color:var(--volt);display:inline-block;animation:swipeL 1.6s ease-in-out infinite}
+footer .swipe i+b+i{animation-name:swipeR}
+footer .swipe b{font-weight:400}
+@keyframes swipeL{0%,100%{transform:translateX(0)}50%{transform:translateX(-5px)}}
+@keyframes swipeR{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+body.swiped footer .swipe{opacity:0;pointer-events:none}
 body.inside footer{opacity:0}
 #mcta{display:none;position:fixed;left:max(14px,env(safe-area-inset-left,0px));right:max(14px,env(safe-area-inset-right,0px));bottom:calc(max(14px,env(safe-area-inset-bottom,0px)) + 26px);z-index:4;grid-template-columns:1fr 1fr;gap:10px;transition:opacity .25s}
 #mcta button{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:14px 14px 13px;border:2px solid var(--paper);background:var(--paper);color:var(--ink);box-shadow:0 3px 0 var(--edge);cursor:pointer;min-height:76px}
@@ -419,14 +426,14 @@ a.vgo:hover{text-decoration:underline}
 #mchips button:hover{background:var(--volt)}
 #mchips button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .ask{display:flex;border-top:2px solid var(--ink);flex:none}
-.ask input{flex:1;min-width:0;border:0;padding:13px 12px 12px;font:15px var(--display);background:var(--paper);color:var(--ink)}
+.ask input{flex:1;min-width:0;border:0;padding:13px 12px 12px;font:16px var(--display);background:var(--paper);color:var(--ink)}
 .ask input:focus{outline:none;background:#f6f8e8}
 .ask button{border:0;border-left:2px solid var(--ink);background:var(--ink);color:var(--paper);font:800 12px/1 var(--display);letter-spacing:.1em;padding:0 16px;cursor:pointer}
 
 @media (max-width:640px){
   .brand h1{font-size:30px} .brand p{font-size:11px;max-width:210px} .brand .kick{font-size:10px}
   .hbtn{padding:9px 10px 8px;min-height:36px;font-size:11px}
-  footer .hint{display:none} footer .swipe{display:block} footer .facts{display:none}
+  footer .hint{display:none} footer .swipe{display:flex} footer .facts{display:none}
   #mclock{display:none}
   #mcta{display:none}
   .sign .plate{font-size:10px;padding:5px 7px 4px} .sign .chip{display:none}
@@ -513,7 +520,7 @@ body.warping header *,body.warping #labels *{pointer-events:none!important}
 <footer>
   <div class="facts"><span><b>100M+</b> VIEWS</span><span><b>55M</b> ON ONE VIDEO</span><span>PARSONS BEST INNOVATION</span></div>
   <div class="hint">PICK A PORTFOLIO · OR ASK MARIAH</div>
-  <div class="swipe">← SWIPE TO LOOK AROUND →</div>
+  <div class="swipe" aria-hidden="true"><span><i>←</i><b>SWIPE TO LOOK AROUND</b><i>→</i></span></div>
 </footer>
 
 <div id="mon" hidden role="dialog" aria-modal="true" aria-label="Monitor">
@@ -2362,9 +2369,8 @@ const MAP_D={
 };
 const MAP_CASE={k:"PARSONS CAPSTONE", title:"#GRANTSENTMEMAP", lede:"100 NYC spots I'd send you to.",
   body:["A custom map on Mapbox. Every spot has a score, vibe tags, a short review and directions.",
-        "Send a keyword in my DMs and an automation (ManyChat) replies with the map.",
         "It closes out five years of food content."],
-  tools:"MAPBOX · JAVASCRIPT · MANYCHAT", links:[{t:"OPEN THE MAP ↗",href:MAP_URL}]};
+  tools:"MAPBOX · JAVASCRIPT", links:[{t:"OPEN THE MAP ↗",href:MAP_URL}]};
 
 /* ============ palette (3D) ============ */
 const C={paper:0xe4e7eb, white:0xffffff, ink:0x15171b, ink2:0x23262c, wall:0x1a1d23, floor:0x0f1115, grey:0x8e96a1, red:0xe1251b, volt:0xd7ff00};
@@ -2951,7 +2957,7 @@ const goal={pos:new THREE.Vector3(),look:new THREE.Vector3()}, cur={pos:new THRE
 let VIEW="home", focus=null, aspect=1, par={x:0,y:0}, parT={x:0,y:0}, panX=0, panT=0;
 function fit(){
   const w=innerWidth,h=innerHeight; aspect=w/h; renderer.setSize(w,h,false); cam.aspect=aspect;
-  let vf,halfW; if(aspect>=1.15){ vf=40; halfW=2.1; } else if(aspect>=0.8){ vf=50; halfW=1.75; } else { vf=56; halfW=1.6; }
+  let vf,halfW; if(aspect>=1.15){ vf=40; halfW=2.1; } else if(aspect>=0.8){ vf=50; halfW=1.75; } else { vf=56; halfW=1.25; }
   cam.fov=vf; cam.updateProjectionMatrix();
   const tv=Math.tan(vf*Math.PI/360), dist=Math.max(2.4,halfW/(tv*aspect)), lookY=aspect<0.8?1.42:1.2;
   base.look.set(0,lookY,-0.45); base.pos.set(0,lookY+0.2+dist*(aspect<0.8?0.16:0.12),SCZ+dist);
@@ -3041,7 +3047,7 @@ const cvs=renderer.domElement;
 const busy=()=>VIEW!=="home"||!panel.hidden||!!warp||away||PWR.on;
 cvs.addEventListener("pointermove",e=>{
   if(e.pointerType==="mouse"){ parT.x=(e.clientX/innerWidth-0.5)*2; parT.y=-(e.clientY/innerHeight-0.5)*2; }
-  if(down&&aspect<1.15&&!focus&&VIEW==="home") panT=Math.max(-0.7,Math.min(0.7,down.pan-(e.clientX-down.x)/innerWidth*2.2));
+  if(down&&aspect<1.15&&!focus&&VIEW==="home"){ const lim=aspect<0.8?1.0:0.7; panT=Math.max(-lim,Math.min(lim,down.pan-(e.clientX-down.x)/innerWidth*2.2)); if(Math.abs(panT)>0.18) document.body.classList.add("swiped"); }
   if(busy()) return; const r=pick(e.clientX,e.clientY); hoverId=(r==="content"||r==="ai")?r:null; hoverObj=r; cvs.style.cursor=r?"pointer":"default";
   if(r!==sfxHover){ sfxHover=r; if(r&&e.pointerType==="mouse") SFX.blip(r); } });
 cvs.addEventListener("wheel",e=>{ if(busy()) return; const r=pick(e.clientX,e.clientY); if(r!=="knob"&&r!=="speaker") return; e.preventDefault(); setVol(VOL+(e.deltaY<0?1:-1)); },{passive:false});
